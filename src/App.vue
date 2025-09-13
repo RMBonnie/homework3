@@ -14,6 +14,7 @@
     myArray.value.push({
       content: input_content.value,
       category: input_category.value,
+      done: false,
     })
 
     input_content.value = ''
@@ -28,7 +29,7 @@
     
     <section class="greeting">
       <h2 class="class">
-        Welcome back, <input type="text" placeholder="Enter Name" v-model="name">
+        Welcome back, <input type="text" placeholder="Enter Name" v-model="name"></input>
       </h2>
 
     </section>
@@ -38,28 +39,38 @@
       <form submist.prevent = "addTodo">
       <h4>That's on your to do list?</h4> 
       <input type="Text" placeholder="e.g., Make a Video" v-model="input_contnet"/>
-
-
-    <h4>Pick a category</h4>
-    <div class="options">
+      <h4>Pick a category</h4>
+      <div class="options">
       <label>
         <input type="radio" name="category" value="business" v-model="input_category"></input>
         <span class="bubble buisness"></span>
         <div>Business</div>
       </label>
-            <label>
-         <input type="radio" name="category" value="personal" v-model="input_category"></input>
+        <label>
+          <input type="radio" name="category" value="personal" v-model="input_category"></input>
           <span class="bubble personal"></span>
           <div>Personal</div>
-       </label>
-
-
+        </label>
       </div>
       <input type="submit" value="Add To Do"/>
-     </form>
-    </section>
+    </form>
+  </section>
     
+
     <secion class="todo-list">
+
+      <div class="list">
+        <div v-for="x in myArray" :class=" `todo-item ${x.done ? 'done' : 'not-done'}`" :key="x">
+          <label>
+            <input type="checkbox" v-model="x.done"/></input>
+            <span :class="`bubble ${x.category}`"></span>
+          </label>
+          <div class="todo-content">
+            <input type="text" v-model="x.content"/></input>
+          </div>
+
+        </div>
+      </div>
 
 
     </secion>
